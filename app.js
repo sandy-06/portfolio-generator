@@ -1,20 +1,13 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generatePage = require('./src/page-template.js')
+const templateData = []
 
 
-//const pageHTML = generatePage(name, github);
-
-
-
-
-//fs.writeFile('./index.html', pageHTML, err => {
-// if (err) throw err;
-
-//  console.log('Portfolio complete! Check out index.html to see the output!');
-//});
 
 const promptUser = () => {
+  // destructure projects and about data from templateData based on their property key names
+  const { projects, about, ...header } = templateData;
   return inquirer.prompt([
     {
       type: 'input',
@@ -61,7 +54,7 @@ const promptUser = () => {
         }
       }
     }
-    
+
   ])
 };
 //promptUser().then(answers => console.log(answers));
@@ -104,7 +97,7 @@ const promptProject = portfolioData => {
           }
         }
       },
-     {
+      {
         type: 'checkbox',
         name: 'languages',
         message: 'What did you build the project with? (Check all the apply)',
@@ -149,5 +142,11 @@ const promptProject = portfolioData => {
 promptUser()
   .then(promptProject)
   .then(portfolioData => {
-    console.log(portfolioData);
+
+    const pageHTML = generatePage(portfolioData);
+    fs.writeFile('./index.html', pageHTML, err => {
+      if (err) throw err;
+
+      console.log('Portfolio complete! Check out index.html to see the output!');
+    });
   });
