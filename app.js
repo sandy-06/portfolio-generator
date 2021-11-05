@@ -1,13 +1,13 @@
 const inquirer = require('inquirer');
 const fs = require('fs');
 const generatePage = require('./src/page-template.js')
-const templateData = []
+
 
 
 
 const promptUser = () => {
   // destructure projects and about data from templateData based on their property key names
-  const { projects, about, ...header } = templateData;
+  
   return inquirer.prompt([
     {
       type: 'input',
