@@ -19,3 +19,17 @@ const writeFile = fileContent => {
         });
     });
 };
+const copyfile = () => {
+    return new Promise((resolve, reject) =>
+        fs.copyfile(`./src/style.css`, `./.dist/style.cc`, err => {
+            if (err) {
+                reject(err);
+                return;
+            }
+            resolve({
+                ok: true,
+                message: 'Stylesheet created'
+            });
+        })
+    )
+}
