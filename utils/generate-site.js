@@ -33,3 +33,4 @@ const copyfile = () => {
         })
     )
 }
+module.exports = { writeFile, copyfile  };
